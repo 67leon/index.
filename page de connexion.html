@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion - Académie Virtuelle</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Times+New+Roman&display=swap" rel="stylesheet">
+  <style>
+    /* Global styles */
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      width: 100%;
+      max-width: 400px;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      font-family: 'Times New Roman', serif;
+      text-align: center;
+      color: #007BFF;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    input {
+      margin-bottom: 15px;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .button {
+      background-color: #007BFF;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .button:hover {
+      background-color: #0056b3;
+    }
+    .link {
+      text-align: center;
+      margin-top: 10px;
+      color: #007BFF;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .link:hover {
+      text-decoration: underline;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Formulaire de connexion -->
+    <div id="login-form">
+      <h1>Connexion</h1>
+      <form onsubmit="handleLogin(event)">
+        <input type="email" id="login-email" placeholder="Adresse email" required>
+        <input type="password" id="login-password" placeholder="Mot de passe" required>
+        <button type="submit" class="button">Se connecter</button>
+        <a href="javascript:void(0);" class="link" onclick="showForm('reset')">Mot de passe oublié ?</a>
+        <a href="javascript:void(0);" class="link" onclick="showForm('signup')">Créer un compte</a>
+      </form>
+    </div>
+
+    <!-- Formulaire d'inscription -->
+    <div id="signup-form" class="hidden">
+      <h1>Inscription</h1>
+      <form onsubmit="handleSignup(event)">
+        <input type="text" id="signup-name" placeholder="Nom complet" required>
+        <input type="email" id="signup-email" placeholder="Adresse email" required>
+        <input type="password" id="signup-password" placeholder="Mot de passe" required>
+        <input type="password" id="signup-confirm-password" placeholder="Confirmer le mot de passe" required>
+        <button type="submit" class="button">Créer un compte</button>
+        <a href="javascript:void(0);" class="link" onclick="showForm('login')">Déjà un compte ? Connectez-vous</a>
+      </form>
+    </div>
+
+    <!-- Formulaire de réinitialisation -->
+    <div id="reset-form" class="hidden">s
+      <h1>Réinitialisation</h1>
+      <form onsubmit="handleReset(event)">
+        <input type="email" id="reset-email" placeholder="Adresse email" required>
+        <button type="submit" class="button">Envoyer un email de réinitialisation</button>
+        <a href="javascript:void(0);" class="link" onclick="showForm('login')">Retour à la connexion</a>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Gérer l'affichage des formulaires
+    function showForm(formId) {
+      document.getElementById('login-form').classList.add('hidden');
+      document.getElementById('signup-form').classList.add('hidden');
+      document.getElementById('reset-form').classList.add('hidden');
+      document.getElementById(`${formId}-form`).classList.remove('hidden');
+    }
+
+    // Gestion de la soumission des formulaires
+    function handleLogin(event) {
+      event.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      alert(`Connexion avec : ${email}`);
+    }
+
+    function handleSignup(event) {
+      event.preventDefault();
+      const name = document.getElementById('signup-name').value;
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+      const confirmPassword = document.getElementById('signup-confirm-password').value;
+      if (password !== confirmPassword) {
+        alert('Les mots de passe ne correspondent pas.');
+        return;
+      }
+      alert(`Compte créé pour : ${name} (${email})`);
+    }
+
+    function handleReset(event) {
+      event.preventDefault();
+      const email = document.getElementById('reset-email').value;
+      alert(`Un email de réinitialisation sera envoyé à : ${email}`);
+    }
+  </script>
+</body>
+</html>
